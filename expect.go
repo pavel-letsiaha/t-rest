@@ -260,3 +260,46 @@ func checkAbsentPath(m interface{}, pathItem interface{}) string {
 
 	return fmt.Sprintf("Path Item: %v is invalid for absence check", pathItem)
 }
+
+// PresentExpectation validates paths exists in response body
+type PresentExpectation struct {
+	paths []string
+}
+
+func (e PresentExpectation) check(resp *Response) error {
+
+	for _, pathStr := range e.paths {
+		err := responseBodyPathCheck(resp, pathStr, checkPresentPath)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (e PresentExpectation) desc() string {
+	buf := bytes.NewBufferString("")
+
+	buf.WriteString("Present fields:")
+	for _, path := range e.paths {
+		buf.WriteString(fmt.Sprintf("\n  - %s", path))
+	}
+
+	return buf.String()
+}
+
+func checkPresentPath(m interface{}, pathItem interface{}) string {
+
+	if pathStr, ok := pathItem.(string); ok {
+
+		searchResult := Search(m, pathStr)
+		if !(len(searchResult) > 0) {
+			return fmt.Sprintf("Value expected to be exist was not found: %v, path: %v", searchResult, pathStr)
+		}
+
+		return ""
+	}
+
+	return fmt.Sprintf("Path Item: %v is invalid for presence check", pathItem)
+}

@@ -23,7 +23,8 @@
         },
         "absent": [
           "rates.ZZZ"
-        ]
+        ],
+		"present": ["date"]
       }
     }]
   },

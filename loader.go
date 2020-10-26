@@ -495,6 +495,13 @@ const suiteDetailedSchema = `
 				  "items": {
 				    "type": "string"
 				  }
+                },
+                "present": {
+                  "type": "array",
+                  "minItems": 1,
+				  "items": {
+				    "type": "string"
+				  }
                 }
               },
               "additionalProperties": false

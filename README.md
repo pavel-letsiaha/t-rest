@@ -132,6 +132,7 @@ Passing Test:
 | exactBody           | Expected exact body structure and values. Specified body should fully match response. Not specified properties returned in response will cause error.                                                       |
 | bodyPath           | Body matchers: equals, search, size                                                      |
 | absent         | Paths that are NOT expected to be in response                                            | ['user.cardNumber', 'user.password']            |
+| present        | Paths that are expected to be in response                                                | ['user.cardNumber', 'user.password']            |
 | headers        | Expected http headers, specified as a key-value pairs.                                   |
 
 #### 'Expect' body matchers
@@ -219,6 +220,20 @@ Path fromat is the same as in `expect.bodyPath` section
 {
   "expect": {
     "absent": ["user.cardNumber", "user.password"]
+  }
+}
+```
+
+#### 'Expect present' body matchers
+
+Represents paths expected to be in response body.
+Should be used **only** for checks when particular value **is not known**. 
+Path fromat is the same as in `expect.bodyPath` section
+
+```json
+{
+  "expect": {
+    "present": ["user.cardNumber", "user.password"]
   }
 }
 ```

@@ -116,6 +116,7 @@ type Expect struct {
 	Body           interface{}            `json:"body"`
 	ExactBody      interface{}            `json:"exactBody"`
 	Absent         []string               `json:"absent"`
+	Present        []string               `json:"present"`
 	BodySchemaRaw  json.RawMessage        `json:"bodySchema"`
 	BodySchemaFile string                 `json:"bodySchemaFile"`
 	BodySchemaURI  string                 `json:"bodySchemaURI"`

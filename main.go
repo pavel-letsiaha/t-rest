@@ -421,6 +421,10 @@ func expectations(expect Expect, suitePath string) ([]ResponseExpectation, error
 		exps = append(exps, AbsentExpectation{paths: expect.Absent})
 	}
 
+	if len(expect.Present) > 0 {
+		exps = append(exps, PresentExpectation{paths: expect.Present})
+	}
+
 	if len(expect.Headers) > 0 {
 		for k, v := range expect.Headers {
 			exps = append(exps, HeaderExpectation{Name: k, Value: v})

@@ -285,3 +285,45 @@ func TestCheckAbsentNotExactPath(t *testing.T) {
 		)
 	}
 }
+
+func TestCheckPresentPathPositive(t *testing.T) {
+	m, err := jsonAsMap(`{
+			"items": {
+				"test": 1
+			}
+	 	}`)
+	if err != nil {
+		t.Error(err)
+	}
+
+	errorMsg := checkPresentPath(m, "items.test")
+
+	if errorMsg != "" {
+		t.Error(
+			"For", "items.test",
+			"not", "expected", "error",
+			"got", "empty message",
+		)
+	}
+}
+
+func TestCheckPresentPath(t *testing.T) {
+	m, err := jsonAsMap(`{
+			"items": {
+				"test": 1
+			}
+	 	}`)
+	if err != nil {
+		t.Error(err)
+	}
+
+	errorMsg := checkPresentPath(m, "items.present")
+
+	if errorMsg == "" {
+		t.Error(
+			"For", "items.present",
+			"expected", "error",
+			"got", "empty message",
+		)
+	}
+}
